@@ -13,11 +13,6 @@
         </div>
         <div class="col-lg-4 text-center mb-4 mb-lg-0">
           <a class="navbar-brand" href="#">
-            <img
-              class="img-fluid"
-              src="../assets/images/logo.png"
-              alt="Hugo documentation theme"
-            />
           </a>
         </div>
         <div class="col-lg-4">
