@@ -14,8 +14,8 @@
           <h1 class="mb-4">Partage d'expérience de vie à l'aide d'un Forum.</h1>
           <p class="mb-5">
             Découvrez un espace d'échange vibrant où vos idées prennent vie et
-            où les élèves se rassemble pour partager passions, connaissances et
-            experiences.
+            où les étudiants se rassemblent pour partager passions, connaissances et
+            expériences.
           </p>
           <button
             @click="showForumModal = true"
@@ -48,7 +48,12 @@
                 ></button>
               </div>
               <div class="modal-body">
-                <input type="text" class="form-control" placeholder="Poser votre question" v-model="question['content']">
+                <p>
+                  Ceci est un exemple de contenu scrollable dans un modal. Vous
+                  pouvez mettre beaucoup de contenu ici pour voir l'effet de
+                  défilement.
+                </p>
+                <p>Paragraphe répété pour démonstration :</p>
               </div>
               <div class="modal-footer">
                 <button
@@ -56,12 +61,13 @@
                   class="btn btn-primary"
                   @click="showForumModal = false"
                 >
-                  Envoyer
+                  Fermer
                 </button>
               </div>
             </div>
           </div>
         </div>
+
         <!-- Backdrop -->
         <div v-if="showForumModal" class="modal-backdrop fade show"></div>
       </div>
@@ -69,34 +75,11 @@
   </section>
 </template>
   <script>
-import {backServer} from "@/config/axiosConfig";
 export default {
-  
   data() {
     return {
       showForumModal: false,
-      question: {},
-      response: {}
     };
   },
-  methods: {
-    async askQuestion(){
-      try {
-        const response = await backServer.post('posts',question) 
-        this.takeResponse()
-      } catch (error) {
-        console.log(error)
-      }
-    },
-    async takeResponse(){
-      try {
-        const response = await backServer.get('posts') 
-        this.response = [...response.data]
-      } catch (error) {
-        console.log(error)
-      }
-    }
-  }
-
 };
 </script>

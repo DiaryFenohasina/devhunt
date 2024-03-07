@@ -53,7 +53,7 @@ const Mentorat = {
       texte2 : 'Chaque jeune trouve dans son mentor non seulement un guide expert, mais aussi un catalyseur d\'inspiration et de soutien.'
     },
     cadran2 : {
-      title :  'Binome de classe',
+      title :  'Binôme de classe',
       texte1 : 'Dans ce vaste monde académique, notre binôme de classe se forme comme une équipe prête à affronter les défis, à partager les connaissances et à créer des souvenirs inoubliables. ',
       texte2 : 'Ensemble, nous traçons le chemin vers la réussite, avec complicité, entraide et détermination. Prêt(e)s à embarquer dans cette aventure éducative à deux ?'
     },
@@ -88,7 +88,7 @@ const Mentorat = {
     {
       icon : 'ti-credit-card',
       image : logo,
-      title: 'Sport',
+      title: 'Sports',
       text : 'Explorez notre club sportif, un lieu où la camaraderie et la compétition se marient pour créer des moments mémorables sur et en dehors du terrain.',
       about : `Most of the documentation site are looks identical. Thats why we take an initiative to 
                 make something different and bring some new concept with minimal design. Meet Godocs ,

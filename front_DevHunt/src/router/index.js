@@ -42,7 +42,7 @@ const routes = [
   },  
   //ajouter tojo
   {
-    path: '/Aceuille',
+    path: '/Accueil',
     name: 'aceuille',
     component: Acceuille
   },  

@@ -37,22 +37,58 @@
                 >
               </li>
               <li class="nav-item">
-                <router-link to="/Services/0"
+                <router-link to="/Accueil"
                   ><span
-                    class="nav-link"
-                    :class="getName == 'services' && 'nav-active'"
-                    >Services</span
+                    class="nav-link pb-2"
+                    :class="getName == 'aceuille' && 'nav-active'"
+                    >Accueil</span
                   ></router-link
                 >
               </li>
               <li class="nav-item">
-                <router-link class="nav-link" to="#2">Link</router-link>
+                <router-link to="/Services/0"
+                  ><span
+                    class="nav-link"
+                    :class="getName == 'Service' && 'nav-active'"
+                    >Clubs</span
+                  ></router-link
+                >
               </li>
               <li class="nav-item">
-                <router-link class="nav-link" to="#2">Link</router-link>
+                <router-link to="/monitorat"
+                  ><span
+                    class="nav-link"
+                    :class="getName == 'guide' && 'nav-active'"
+                    >Mentorat</span
+                  ></router-link
+                >
               </li>
               <li class="nav-item">
-                <router-link class="nav-link" to="#2">Link</router-link>
+                <router-link to="/Forum"
+                  ><span
+                    class="nav-link"
+                    :class="getName == 'Forum' && 'nav-active'"
+                    >Forum</span
+                  ></router-link
+                >
+              </li>
+              <li class="nav-item">
+                <router-link to="/discussion"
+                  ><span
+                    class="nav-link"
+                    :class="getName == 'discussion' && 'nav-active'"
+                    >Chat</span
+                  ></router-link
+                >
+              </li>
+              <li class="nav-item">
+                <router-link to="/mapp"
+                  ><span
+                    class="nav-link"
+                    :class="getName == 'mapp' && 'nav-active'"
+                    >Map</span
+                  ></router-link
+                >
               </li>
             </ul>
             <router-link v-if="getName === 'SignIn'" to="/Sign/Up">

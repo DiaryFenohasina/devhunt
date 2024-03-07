@@ -92,56 +92,63 @@ import { backServer } from "@/config/axiosConfig";
 import { io }  from "socket.io-client"
 import sary from '@/assets/images/avatar.png'
 import {bot,chat, mentor} from '@/assets/images/index'
+import {
+    GoogleGenerativeAI,
+    HarmCategory,
+    HarmBlockThreshold,
+  } from "@google/generative-ai";
 
 export default {
   data() {
     return {
         bot,chat,mentor,
         picture: sary,
-      index: -1,
-      id : 1,
-      username : 'Rotsy',
-    //   id: parseInt(localStorage.getItem("id")),
-    //   username: localStorage.getItem("username"),
-      panel:'ChatBot',
-      user:{},
-      room : [],
-      users: [
-        // {
-        //     id: 0,
-        //     username: 'RAMANANTSOA Rotsiniaina'
-        // },
-        // {
-        //     id: 1,
-        //     username: 'RATSIMBAZAFY Tojoniaina Mbola Safidy'
-        // }
+        index: -1,
+        id : 1,
+        username : 'Rotsy',
+      //   id: parseInt(localStorage.getItem("id")),
+      //   username: localStorage.getItem("username"),
+        panel:'ChatBot',
+        user:{},
+        room : [],
+        users: [
+          // {
+          //     id: 0,
+          //     username: 'RAMANANTSOA Rotsiniaina'
+          // },
+          // {
+          //     id: 1,
+          //     username: 'RATSIMBAZAFY Tojoniaina Mbola Safidy'
+          // }
 
+          ],
+        connectedUsers: [],
+        newMessage: null,
+        messages: [
+          // {
+          //     UserId: 1,
+          //     msg : 'hello'
+          // },
+          // {
+          //     UserId: 0,
+          //     msg : 'hello'
+          // }
         ],
-      connectedUsers: [],
-      newMessage: null,
-      messages: [
-        // {
-        //     UserId: 1,
-        //     msg : 'hello'
-        // },
-        // {
-        //     UserId: 0,
-        //     msg : 'hello'
-        // }
-      ],
-      messagesChat:[],
-      socket: null
+        messagesChat:[
+          
+        ],
+        socket: null
       
     };
   },
   created() {
     
-    this.socketConnect()
-    this.getUsers()
+    // this.socketConnect()
+    // this.getUsers()
   },
   beforeDestroy()
   {
-      this.disconnect()
+      // this.disconnect()
   },
   methods: {
     isOnline(index)
@@ -213,30 +220,25 @@ export default {
         this.messages = [...this.messages, message]
       })
     },
-    sendMessage()
+    async sendMessage()
     {
       if(!this.newMessage) return
 
       if(this.panel === 'ChatBot')
       {
+        
         let msg = { msg: this.newMessage, type: 'user'}
         this.messagesChat = [...this.messagesChat, msg]
-        backServer.post('/chat',{message: this.newMessage})
-        .then(async res => {
-        //   if(res.data.message == 'message stored'){
-            const message = await res.data.msg
-            // console.log(res.data.msg)
-            this.socket.emit('sendMessage', message)
-            // console.log(res.data.message)
-            this.messagesChat = [...this.messagesChat, message]
-            // console.log(this.messages)
-        //   }
-        })
-        .catch(err => {
-          console.log(err)
-        })
+        
+        
+        const sms =  { mess: 'success', msg:{type:'bot', msg: '' }}
+        const resBot = await this.getChatMessage(this.newMessage)
+        console.log(resBot);
+
+        this.messagesChat = [...this.messagesChat, { type : 'bot', msg: `${resBot}`}]
         
         this.newMessage = ''
+        
       }
       else{
         let msg = {UserId : this.id, msg: this.newMessage, room: this.room}
@@ -255,6 +257,62 @@ export default {
       this.newMessage = ''
       }
 
+    },
+    async getChatMessage(x)
+    {
+
+        //-------------------------------------------------------------
+        const message = x
+
+        const MODEL_NAME = "gemini-1.0-pro";
+        const API_KEY = "AIzaSyCR3JrLBGsFOTo1klthVZtVo3q1fkIe5UQ";
+
+        const genAI = new GoogleGenerativeAI(API_KEY);
+        const model = genAI.getGenerativeModel({ model: MODEL_NAME });
+    
+        const generationConfig = {
+            temperature: 0.9,
+            topK: 1,
+            topP: 1,
+            maxOutputTokens: 2048,
+        };
+  
+        const safetySettings = [
+        {
+            category: HarmCategory.HARM_CATEGORY_HARASSMENT,
+            threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+        },
+        {
+            category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
+            threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+        },
+        {
+            category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
+            threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+        },
+        {
+            category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
+            threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+        },
+        ];
+  
+        const chat = model.startChat({
+            generationConfig,
+            safetySettings,
+            history: [
+            ],
+        });
+  
+        const result = await chat.sendMessage(message);
+        const response = result.response;
+        let newText = response.text().replace(/\*\*/g, '');
+
+        return newText
+        
+        
+        // //-------------------------------------------------------------
+
+        
     },
     setRoom(id)
     {

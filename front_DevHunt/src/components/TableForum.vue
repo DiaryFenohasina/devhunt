@@ -21,7 +21,7 @@
                   data-toggle="collapse"
                   data-target=".forum-content"
                   class="text-body"
-                  >Réclamation note aux scolarité?</a
+                  >Réclamation de note à la scolarité?</a
                 >
               </h6>
               <p style="margin-bottom: 0px" class="text-secondary">
@@ -66,7 +66,7 @@
                   data-toggle="collapse"
                   data-target=".forum-content"
                   class="text-body"
-                  >Réclamation note aux scolarité?</a
+                  >Réclamation de note à la scolarité?</a
                 >
               </h6>
               <p style="margin-bottom: 0px" class="text-secondary">
@@ -111,7 +111,7 @@
                   data-toggle="collapse"
                   data-target=".forum-content"
                   class="text-body"
-                  >Réclamation note aux scolarité?</a
+                  >Réclamation de note à la scolarité?</a
                 >
               </h6>
               <p style="margin-bottom: 0px" class="text-secondary">
@@ -156,7 +156,7 @@
                   data-toggle="collapse"
                   data-target=".forum-content"
                   class="text-body"
-                  >Réclamation note aux scolarité?</a
+                  >Réclamation de note à la scolarité?</a
                 >
               </h6>
               <p style="margin-bottom: 0px" class="text-secondary">
@@ -201,7 +201,7 @@
                   data-toggle="collapse"
                   data-target=".forum-content"
                   class="text-body"
-                  >Réclamation note aux scolarité?</a
+                  >Réclamation de note à la scolarité?</a
                 >
               </h6>
               <p style="margin-bottom: 0px" class="text-secondary">
